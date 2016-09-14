@@ -73,11 +73,11 @@ function(input, output) {
        		idx <- !toupper(values$df_data$Country) %in% countrycode_data$iso2c
        		values$df_data$Country[idx] <- input$country
        	}
-      	print(summary(values$df_data))
     })
     
 
-    output$downloadData <- downloadHandler(filename = 'turbo.csv', content = function(file)
+    output$downloadData <- downloadHandler(filename = function() { 
+      paste(input$date, '.csv', sep='') }, content = function(file)
       	{write.csv(values$df_data, row.names = F, file)}, contentType = 'csv')
     
     output$df_data_out <- renderTable(head(values$df_data,10))
