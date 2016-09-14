@@ -1,0 +1,11 @@
+---
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<center> <h1> R Markdown </h1> </center>
+
+Welcome to the leads filtering application written in R. It is developed to automatically filter files from ScrapingHub, Mohibur and Ionut so they are ready for database upload and safe your time ;) Please upload a .csv file on this tab and proceed to the next tab....

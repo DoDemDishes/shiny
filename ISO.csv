@@ -1,0 +1,240 @@
+Country,ISO Country,ISO Language
+Andorra,AD,ca
+United Arab Emirates,AE,ar
+Afghanistan,AF,ps
+Antigua and Barbuda,AG,en
+Anguilla,AI,en
+Albania,AL,sq
+Armenia,AM,hy
+Angola,AO,pt
+Antarctica,AQ,en
+Argentina,AR,es
+American Samoa,AS,en
+Austria,AT,de
+Australia,AU,en
+Aruba,AW,
+Azerbaijan,AZ,az
+Bosnia and Herzegovina,BA,bs
+Barbados,BB,en
+Bangladesh,BD,bn
+Belgium,BE,fr
+Burkina Faso,BF,fr
+Bulgaria,BG,bg
+Bahrain,BH,ar
+Burundi,BI,fr
+Benin,BJ,fr
+Bermuda,BM,en
+Brunei,BN,ml
+Bolivia,BO,es
+Bonaire,BQ,nl
+Brazil,BR,pt
+Bahamas,BS,en
+Bhutan,BT,dz
+Botswana,BW,en
+Belarus,BY,be
+Belize,BZ,en
+Canada,CA,en
+Cocos Islands,CC,en
+Dem. Republic of the Congo,CD,fr
+Central African Republic,CF,fr
+Congo,CG,fr
+Switzerland,CH,fr
+Ivory Coast,CI,fr
+Cook Islands,CK,en
+Chile,CL,es
+Cameroon,CM,en
+China,CN,zh
+Colombia,CO,es
+Costa Rica,CR,es
+Cuba,CU,es
+Cape Verde Islands,CV,pt
+Netherlands Antilles,CW,nl
+Christmas Island,CX,en
+Cyprus,CY,el
+Czech Republic,CZ,cs
+Germany,DE,de
+Djibouti,DJ,ar
+Denmark,DK,da
+Dominica,DM,en
+Dominican Republic,DO,es
+Algeria,DZ,ar
+Ecuador,EC,es
+Estonia,EE,et
+Egypt,EG,ar
+Eritrea,ER,ar
+Spain,ES,es
+Ethiopia,ET,am
+Finland,FI,fi
+Fiji Islands,FJ,en
+Falkland Islands,FK,en
+Federated States of Micronesia,FM,en
+Faroe Islands,FO,da
+France,FR,fr
+Gabon Republic,GA,fr
+United Kingdom,GB,en
+Grenada and Carriacuou,GD,en
+Georgia,GE,ka
+French Guiana,GF,fr
+Guernsey,GG,en
+Ghana,GH,en
+Gibraltar,GI,en
+Greenland,GL,kl
+Gambia,GM,en
+Guinea,GN,fr
+Guadeloupe,GP,fr
+Equatorial Guinea,GQ,pt
+Greece,GR,el
+Guatemala,GT,es
+Guam,GU,en
+Guinea-Bissau,GW,pt
+Guiana,GY,en
+Hong Kong,HK,zh
+Honduras,HN,es
+Croatia,HR,hr
+Haiti,HT,fr
+Hungary,HU,hu
+Indonesia,ID,id
+Ireland,IE,en
+Israel,IL,he
+Isle of Man,IM,en
+India,IN,gu
+Diego Garcia,IO,
+Iraq,IQ,ar
+Iran,IR,fa
+Iceland,IS,is
+Italy,IT,it
+Jersey,JE,en
+Jamaica,JM,en
+Jordan,JO,ar
+Japan,JP,ja
+Kenya,KE,en
+Kyrgyzstan,KG,ky
+Cambodia,KH,km
+Kiribati,KI,en
+Comoros,KM,ar
+St. Kitts,KN,en
+North Korea,KP,ko
+South Korea,KR,ko
+Kuwait,KW,ar
+Cayman Islands,KY,en
+Kazakhstan,KZ,kk
+Laos,LA,
+Lebanon,LB,ar
+St. Lucia,LC,en
+Liechtenstein,LI,de
+Sri Lanka,LK,ta
+Liberia,LR,en
+Lesotho,LS,en
+Lithuania,LT,lt
+Luxembourg,LU,fr
+Latvia,LV,lv
+Libya,LY,ar
+Morocco,MA,ar
+Monaco,MC,fr
+Moldova,MD,ro
+Montenegro,ME,sr
+Madagascar,MG,fr
+Marshall Islands,MH,en
+Macedonia,MK,mk
+Mali Republic,ML,fr
+Myanmar,MM,my
+Mongolia,MN,mn
+Macau,MO,pt
+Mariana Islands,MP,en
+Martinique,MQ,fr
+Mauritania,MR,ar
+Montserrat,MS,en
+Malta,MT,en
+Mauritius,MU,en
+Maldives,MV,dv
+Malawi,MW,en
+Mexico,MX,es
+Malaysia,MY,ms
+Mozambique,MZ,pt
+Namibia,NA,en
+New Caledonia,NC,fr
+Niger Republic,NE,fr
+Norfolk Island,NF,
+Nigeria,NG,en
+Nicaragua,NI,es
+Netherlands,NL,nl
+Norway,NO,no
+Nepal,NP,ne
+Nauru,NR,
+Niue,NU,
+New Zealand,NZ,en
+Oman,OM,ar
+Panama,PA,es
+Peru,PE,es
+French Polynesia,PF,fr
+Papua New Guinea,PG,en
+Philippines,PH,en
+Pakistan,PK,pa
+Poland,PL,pl
+St. Pierre and Miquelon,PM,fr
+Puerto Rico,PR,es
+Palestine,PS,ar
+Portugal,PT,pt
+Palau,PW,en
+Paraguay,PY,es
+Qatar,QA,ar
+Reunion Island,RE,
+Romania,RO,ro
+Serbia,RS,sr
+Russia,RU,ru
+Rwanda,RW,fr
+Saudi Arabia,SA,ar
+Solomon Islands,SB,en
+Seychelles,SC,en
+Sudan,SD,ar
+Sweden,SE,sv
+Singapore,SG,en
+St. Helena,SH,en
+Slovenia,SI,sl
+Slovakia,SK,sk
+Sierra Leone,SL,en
+San Marino,SM,it
+Senegal Republic,SN,fr
+Somalia Republic,SO,
+Suriname,SR,nl
+South Sudan,SS,en
+Sao Tome,ST,
+El Salvador,SV,es
+Sint Maarten,SX,
+Syria,SY,ar
+Swaziland,SZ,en
+Turks and Caicos Islands,TC,en
+Chad Republic,TD,fr
+Togo,TG,fr
+Thailand,TH,th
+Tajikistan,TJ,tg
+Tokelau,TK,en
+East Timor,TL,pt
+Turkmenistan,TM,"tk, ru"
+Tunisia,TN,ar
+Tonga,TO,en
+Turkey,TR,tr
+Trinidad and Tobago,TT,en
+Tuvalu,TV,en
+Taiwan,TW,zh
+Tanzania,TZ,en
+Ukraine,UA,uk
+Uganda,UG,en
+Wake Island,UM,en
+United States,US,en
+Uruguay,UY,es
+Uzbekistan,UZ,uz
+Vatican city,VA,it
+St. Vincent,VC,en
+Venezuela,VE,es
+British Virgin Islands,VG,en
+US Virgin Islands,VI,en
+Vietnam,VN,vi
+Vanuatu,VU,en
+Wallis and Futuna Islands,WF,fr
+Samoa,WS,en
+Yemen,YE,ar
+Mayotte Island,YT,fr
+South Africa,ZA,en
+Zambia,ZM,en
+Zimbabwe,ZW,en
