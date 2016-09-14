@@ -57,7 +57,7 @@ function(input, output) {
       	values$df_data$contact.details.update <- as.character(input$date)
       
 ######Mail filtering
-      	values$df_data$email <- gsub('\\(at\\)', '@', df$email)
+      	values$df_data$email <- gsub('\\(at\\)', '@', values$df_data$email)
       	idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
       	values$df_data$email[!idx] <- ""
 ######Status filtering
@@ -65,11 +65,10 @@ function(input, output) {
       ##TO DO
       
 ######Country filtering
-      	print(table(values$df_data$Country))
-       	library(countrycode)
+      	library(countrycode)
       	
-      	idx <- countrycode(df$country, "iso3c", "iso2c")
-      	df$country[!is.na(idx)] <- idx[!is.na(idx)] 
+      	idx <- countrycode(values$df_data$Country, "iso3c", "iso2c")
+      	values$df_data$Country[!is.na(idx)] <- idx[!is.na(idx)] 
       	if (any(!toupper(unique(values$df_data$Country)) %in% countrycode_data$iso2c)) {
        		idx <- !toupper(values$df_data$Country) %in% countrycode_data$iso2c
        		values$df_data$Country[idx] <- input$country
