@@ -16,11 +16,23 @@ function(input, output) {
     })
     
     observeEvent(input$go, {
-      
+      if(input$event == 3){
+          if(input$platform == 1){
+              values$df_data <- values$df_data[,1:2]
+              columns <- c("amazon_merchant_id", "Predicted GMV")
+              colnames(values$df_data) <- columns
+              values$df_data <- values$df_data[!(is.na(values$df_data$amazon_merchant_id) | values$df_data$amazon_merchant_id == ""),] 
+          }
+          if(input$platform == 2){
+              values$df_data <- values$df_data[,1:2]
+              columns <- c("ebay_username", "Predicted GMV")
+              colnames(values$df_data) <- columns
+              values$df_data <- values$df_data[!(is.na(values$df_data$ebay_username) | values$df_data$ebay_username == ""),] 
+          }
+      } else{
     	if(input$platform == 1){
 ######Preparing columns in the right order and names
-      		temp <- values$df_data[,1:9]
-      		values$df_data <- temp
+      		values$df_data <- values$df_data[,1:9]
       		columns <- c("amazon_merchant_id", "Country", "First.name", "Last.name", "email", "phone", 
                 "Agent.signature", "contact.details.update", "status")
       		colnames(values$df_data) <- columns
@@ -28,7 +40,7 @@ function(input, output) {
       
 ######Deleting rows with empty id
       		values$df_data <- values$df_data[!(is.na(values$df_data$amazon_merchant_id) | values$df_data$amazon_merchant_id == ""),] 
-      	}
+      	} 
       	if(input$platform == 2){
         	temp <- values$df_data[,1:9]
         	values$df_data <- temp
@@ -57,6 +69,7 @@ function(input, output) {
       	values$df_data$contact.details.update <- as.character(input$date)
       
 ######Mail filtering
+      	
       	values$df_data$email <- gsub('\\(at\\)', '@', values$df_data$email)
       	idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
       	values$df_data$email[!idx] <- ""
@@ -72,7 +85,7 @@ function(input, output) {
       	if (any(!toupper(unique(values$df_data$Country)) %in% countrycode_data$iso2c)) {
        		idx <- !toupper(values$df_data$Country) %in% countrycode_data$iso2c
        		values$df_data$Country[idx] <- input$country
-       	}
+       	}}
     })
     
 
@@ -99,5 +112,4 @@ function(input, output) {
     output$values <- renderTable({
       	rowSummary()
     })
-    
-  }
+}
