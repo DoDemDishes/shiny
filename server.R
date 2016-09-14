@@ -66,9 +66,9 @@ function(input, output) {
 ######Country filtering
       	print(table(values$df_data$Country))
        	library(countrycode)
-       	idx <- toupper(values$df_data$Country) == "USA"
-       	values$df_data$Country[idx] <- "US"
-
+      	
+      	idx <- countrycode(df$country, "iso3c", "iso2c")
+      	df$country[!is.na(idx)] <- idx[!is.na(idx)] 
       	if (any(!toupper(unique(values$df_data$Country)) %in% countrycode_data$iso2c)) {
        		idx <- !toupper(values$df_data$Country) %in% countrycode_data$iso2c
        		values$df_data$Country[idx] <- input$country
