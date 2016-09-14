@@ -57,6 +57,7 @@ function(input, output) {
       	values$df_data$contact.details.update <- as.character(input$date)
       
 ######Mail filtering
+      	values$df_data$email <- gsub('\\(at\\)', '@', df$email)
       	idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
       	values$df_data$email[!idx] <- ""
 ######Status filtering
