@@ -21,7 +21,7 @@ navbarPage("Lead Automation Tool",
                 )
             ),
         	mainPanel(
-            	includeMarkdown("C:/Users/Marta Klimaszewska/Downloads/Lead automation app/intro.md")
+            	#includeMarkdown("C:/Users/Marta Klimaszewska/Downloads/Lead automation app/intro.md")
               	)
             )
     ),
