@@ -16,6 +16,23 @@ function(input, output) {
     observeEvent(input$change, {
     	values$df_data <- read.csv(input$file$datapath, sep = input$sep, stringsAsFactors = F)
     })
+##Rendering relevant UI depending on event choice
+output$ui <- renderUI({
+    if (is.null(input$event))
+      return()
+
+    # Depending on input$input_type, we'll generate a different
+    # UI component and send it to the client. 
+    switch(input$event,
+      "1" = sliderInput("dynamic", "amazon",
+                             min = 1, max = 20, value = 10),
+      "2" = sliderInput("dynamic", "ebay",
+                             min = 1, max = 20, value = 10),
+      "3" = sliderInput("dynamic", "webstore",
+                             min = 1, max = 20, value = 10)
+    )
+  })
+
     
 ##Combined changes    
     observeEvent(input$go, {
@@ -82,11 +99,8 @@ function(input, output) {
           values$df_data <- platform_update("amazon", values$df_data, values$df_data$platform)
           values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
         } else if (input$platform == 2){
-<<<<<<< HEAD
           values$df_data <- platform_update("ebay", values$df_data, values$df_data$platform)
-=======
           batch_platform <- "ebay"
->>>>>>> 867f54fc9287627e7bfdf934478a8b4c81038677
           values$df_data <- empty_rows(values$df_data, values$ebay_username)
         }
         else {
