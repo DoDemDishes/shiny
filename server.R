@@ -1,5 +1,7 @@
 library(shiny)
 
+options(shiny.maxRequestSize=30*1024^2) 
+
 function(input, output) {
 ##We are creating a data frame that is not reactive
     values <- reactiveValues(df_data = NULL)
@@ -82,12 +84,8 @@ function(input, output) {
           values$df_data <- platform_update("amazon", values$df_data, values$df_data$platform)
           values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
         } else if (input$platform == 2){
-<<<<<<< HEAD
           values$df_data <- platform_update("ebay", values$df_data, values$df_data$platform)
-=======
-          batch_platform <- "ebay"
->>>>>>> 867f54fc9287627e7bfdf934478a8b4c81038677
-          values$df_data <- empty_rows(values$df_data, values$ebay_username)
+          values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
         }
         else {
           values$df_data <- platform_update("webstore", values$df_data, values$df_data$platform)
