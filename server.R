@@ -68,7 +68,24 @@ function(input, output) {
 ##NEW LEADS##
 #############
       if (input$event == 1){
-      cat("helloworld")
+        batch_platform <-  if (input$platform == 1) {
+          "amazon"
+        } else if (input$platform == 2) {
+          "ebay"
+        } else 
+          "webstore"
+        
+        columns <- c("company_name", "amazon_merchant_id", "amazon_feedback", "ebay_username"
+                     ,"webstore_url", "webstore_traffic", "category", "platform"              
+                     ,"country", "first_name", "last_name", "phone", "email", "language"
+                     ,"lead_source", "lead_status", "marketing_campaign_2", "webstore_platform"      
+                     ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv" 
+                     ,"ebay_item_location", "ebay_posts_to")
+        
+        values$df_data <- values$df_data[,1:17]
+        values$df_data[,18:23] <- ""
+        
+        colnames(values$df_data) <- columns
       }
     })
     
