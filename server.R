@@ -68,13 +68,7 @@ function(input, output) {
 ##NEW LEADS##
 #############
       if (input$event == 1){
-        batch_platform <-  if (input$platform == 1) {
-          "amazon"
-        } else if (input$platform == 2) {
-          "ebay"
-        } else 
-          "webstore"
-        
+###data frame template###        
         columns <- c("company_name", "amazon_merchant_id", "amazon_feedback", "ebay_username"
                      ,"webstore_url", "webstore_traffic", "category", "platform"              
                      ,"country", "first_name", "last_name", "phone", "email", "language"
@@ -82,11 +76,19 @@ function(input, output) {
                      ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv" 
                      ,"ebay_item_location", "ebay_posts_to")
         
-
         values$df_data <- values$df_data[,1:23]
-
         colnames(values$df_data) <- columns
-        values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
+        if (input$platform == 1){
+          batch_platform <- "amazon"
+          values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
+        } if (input$platform == 2){
+          batch_platform <- "ebay"
+          values$df_data <- empty_rows(values$df_data, values$ebay_username)
+        }
+        else {
+          batch_platform <- "webstore"
+        }
+      
         if ( any( is.na(values$df_data$platform) | values$df_data$platform == "")) {
           values$df_data[is.na(values$df_data$platform), "platform"] <- batch_platform
           values$df_data[values$df_data$platform == "", "platform"] <- batch_platform
