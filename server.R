@@ -1,5 +1,5 @@
 library(shiny)
-
+source("C:/Users/Marta Klimaszewska/Documents/shiny/global.R")
 function(input, output) {
 ##We are creating a data frame that is not reactive
     values <- reactiveValues(df_data = NULL)
@@ -84,10 +84,10 @@ function(input, output) {
       	values$df_data$contact_details_update <- as.character(input$date)
       
 ######Mail filtering
-      	
-      	values$df_data$email <- gsub('\\(at\\)', '@', values$df_data$email)
-      	idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
-      	values$df_data$email[!idx] <- ""
+      	email_repair(values$df_data$email)
+      	#values$df_data$email <- gsub('\\(at\\)', '@', values$df_data$email)
+      	#idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
+      	#values$df_data$email[!idx] <- ""
 ######Status filtering
       
       ##TO DO
