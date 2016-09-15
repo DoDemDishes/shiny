@@ -22,8 +22,8 @@ navbarPage("Lead Automation Tool",
             ),
         	mainPanel(
             	#includeMarkdown("C:/Users/Marta Klimaszewska/Downloads/Lead automation app/intro.md")
-              	)
             )
+        )
     ),
     tabPanel("Filtering",
         	sidebarPanel(
@@ -46,6 +46,6 @@ navbarPage("Lead Automation Tool",
             mainPanel(
                 div(tableOutput("df_data_out"), style = "font-size: 75%; width: 75%"),
                     tableOutput("values")
-            	)
-           )
+            )
+    )
 )
