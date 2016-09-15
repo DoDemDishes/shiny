@@ -5,10 +5,16 @@ email_repair <- function(data){
   return(data)
 }
 
-columns_update <- function(id_name, data){
-  data <- data[,1:9]
-  columns <- c(id_name, "country", "first_name", "last_name", "email", "phone", 
+columns_update <- function(id_name, data, event){
+  if (event == 2){
+    data <- data[,1:9]
+    columns <- c(id_name, "country", "first_name", "last_name", "email", "phone", 
                "agent_signature", "contact_details_update", "status")
+  } 
+  if (event == 3){
+    data <- data[,1:2]
+    columns <- c(id_name, "predicted_gmv")
+  }
   return(columns)
 }
 

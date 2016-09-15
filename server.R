@@ -25,17 +25,13 @@ function(input, output) {
       if(input$event == 3) {
         ###AMAZON###
           if(input$platform == 1){
-              values$df_data <- values$df_data[,1:2]
-              columns <- c("amazon_merchant_id", "predicted_gmv")
-              colnames(values$df_data) <- columns
+              colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data, input$event)
               values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
           }
         ###EBAY###
           if(input$platform == 2){
-              values$df_data <- values$df_data[,1:2]
-              columns <- c("ebay_username", "predicted_gmv")
-              colnames(values$df_data) <- columns
-              values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
+            colnames(values$df_data) <- columns_update("ebay_username", values$df_data, input$event)
+            values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
           }
       } else {
 ################
@@ -43,19 +39,15 @@ function(input, output) {
 ################
       ###AMAZON###
     	  if(input$platform == 1){
-
-      		colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data)
+      		colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data, input$event)
       		values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
       	}
       ###EBAY###   
       	if(input$platform == 2){
-      	  colnames(values$df_data) <- columns_update("ebay_username", values$df_data)
-        #TO DO: sprawdzenie czy plik nie ma pozamienianych kolumn
-        
-        ######Deleting rows with empty id
+      	  colnames(values$df_data) <- columns_update("ebay_username", values$df_data, input$event)
         	values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
       	}
-      ###COMMON CHANGES###
+###COMMON CHANGES###
         
 ######Filtering phones
         values$df_data$phone <- phone_repair(values$df_data$phone)
