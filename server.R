@@ -82,8 +82,15 @@ function(input, output) {
                      ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv" 
                      ,"ebay_item_location", "ebay_posts_to")
         
-        values$df_data <- values$df_data[,1:17]
+
+        values$df_data <- values$df_data[,1:23]
+
         colnames(values$df_data) <- columns
+        values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
+        if ( any( is.na(values$df_data$platform) | values$df_data$platform == "")) {
+          values$df_data[is.na(values$df_data$platform), "platform"] <- batch_platform
+          values$df_data[values$df_data$platform == "", "platform"] <- batch_platform
+        }
       }
     })
     
