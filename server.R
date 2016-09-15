@@ -83,8 +83,6 @@ function(input, output) {
                      ,"ebay_item_location", "ebay_posts_to")
         
         values$df_data <- values$df_data[,1:17]
-        values$df_data[,18:23] <- ""
-        
         colnames(values$df_data) <- columns
       }
     })
