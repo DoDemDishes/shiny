@@ -33,10 +33,11 @@ function(input, output) {
             colnames(values$df_data) <- columns_update("ebay_username", values$df_data, input$event)
             values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
           }
-      } else {
+      } 
 ################
 ##LEADS UPDATE##
 ################
+      if(input$event == 2) {
       ###AMAZON###
     	  if(input$platform == 1){
       		colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data, input$event)
@@ -58,24 +59,16 @@ function(input, output) {
       	values$df_data$contact_details_update <- as.character(input$date)
       
 ######Mail filtering
-
-      	values$df_data$email <- email_repair(values$df_data$email)
-      	#values$df_data$email <- gsub('\\(at\\)', '@', values$df_data$email)
-      	#idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
-      	#values$df_data$email[!idx] <- ""
-
-
       	values$df_data$email <- email_repair(values$df_data$email)
 
-
-######Status filtering
-      
-      ##TO DO
-      
 ######country filtering
-      	
       values$df_data$country <- country_repair(values$df_data ,values$df_data$country ,input$country)
-      
+      }
+#############
+##NEW LEADS##
+#############
+      if (input$event == 1){
+      cat("helloworld")
       }
     })
     
