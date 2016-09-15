@@ -82,15 +82,27 @@ function(input, output) {
           values$df_data <- platform_update("amazon", values$df_data, values$df_data$platform)
           values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
         } else if (input$platform == 2){
+<<<<<<< HEAD
           values$df_data <- platform_update("ebay", values$df_data, values$df_data$platform)
+=======
+          batch_platform <- "ebay"
+>>>>>>> 867f54fc9287627e7bfdf934478a8b4c81038677
           values$df_data <- empty_rows(values$df_data, values$ebay_username)
         }
         else {
           values$df_data <- platform_update("webstore", values$df_data, values$df_data$platform)
         }
+######Filtering Countries
+        values$df_data$country <- country_repair(values$df_data,values$df_data$country, input$country)
+######Matching countries to empty language
+        #TO DO
+######Filtering phone numbers
+        values$df_data$phone <- phone_repair(values$df_data$phone)
+######Filtering emails
+        values$df_data$email <- email_repair(values$df_data$email)
       }
     })
-    
+
 ######Downloading the file
     output$downloadData <- downloadHandler(filename = function() { 
       paste(input$date, '.csv', sep='') }, content = function(file)
