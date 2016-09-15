@@ -1,5 +1,5 @@
 library(shiny)
-source("C:/Users/Marta Klimaszewska/Documents/shiny/global.R")
+
 function(input, output) {
 ##We are creating a data frame that is not reactive
     values <- reactiveValues(df_data = NULL)
@@ -28,14 +28,14 @@ function(input, output) {
               values$df_data <- values$df_data[,1:2]
               columns <- c("amazon_merchant_id", "predicted_gmv")
               colnames(values$df_data) <- columns
-              values$df_data <- values$df_data[!(is.na(values$df_data$amazon_merchant_id) | values$df_data$amazon_merchant_id == ""),] 
+              values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
           }
         ###EBAY###
           if(input$platform == 2){
               values$df_data <- values$df_data[,1:2]
               columns <- c("ebay_username", "predicted_gmv")
               colnames(values$df_data) <- columns
-              values$df_data <- values$df_data[!(is.na(values$df_data$ebay_username) | values$df_data$ebay_username == ""),] 
+              values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
           }
       } else {
 ################
@@ -43,27 +43,17 @@ function(input, output) {
 ################
       ###AMAZON###
     	  if(input$platform == 1){
-######Preparing columns in the right order and names
-      		values$df_data <- values$df_data[,1:9]
-      		columns <- c("amazon_merchant_id", "country", "first_name", "last_name", "email", "phone", 
-                "agent_signature", "contact_details_update", "status")
-      		colnames(values$df_data) <- columns
-      #TO DO: sprawdzenie czy plik nie ma pozamienianych kolumn
-      
-######Deleting rows with empty id
-      		values$df_data <- values$df_data[!(is.na(values$df_data$amazon_merchant_id) | values$df_data$amazon_merchant_id == ""),] 
+
+      		colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data)
+      		values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
       	}
       ###EBAY###   
       	if(input$platform == 2){
-        	temp <- values$df_data[,1:9]
-        	values$df_data <- temp
-        	columns <- c("ebay_username", "country", "first_name", "last_name", "email", "phone", 
-                "agent_signature", "contact_details_update", "status")
-        	colnames(values$df_data) <- columns
+      	  colnames(values$df_data) <- columns_update("ebay_username", values$df_data)
         #TO DO: sprawdzenie czy plik nie ma pozamienianych kolumn
         
         ######Deleting rows with empty id
-        	values$df_data <- values$df_data[!(is.na(values$df_data$ebay_username) | values$df_data$ebay_username == ""),] 
+        	values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
       	}
       ###COMMON CHANGES###
         
@@ -84,7 +74,7 @@ function(input, output) {
       	values$df_data$contact_details_update <- as.character(input$date)
       
 ######Mail filtering
-      	email_repair(values$df_data$email)
+      	values$df_data$email <- email_repair(values$df_data$email)
       	#values$df_data$email <- gsub('\\(at\\)', '@', values$df_data$email)
       	#idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
       	#values$df_data$email[!idx] <- ""
