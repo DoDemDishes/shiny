@@ -81,7 +81,7 @@ function(input, output) {
       	library(countrycode)
       	
       	idx <- countrycode(values$df_data$country, "iso3c", "iso2c")
-      	values$df_data$country[!is.na(idx)] <- idx[!is.na(idx)] 
+      	values$df_data$country[!is.na(idx)] <- idx[!is.na(idx)]
       	if (any(!toupper(unique(values$df_data$country)) %in% countrycode_data$iso2c)) {
        		idx <- !toupper(values$df_data$country) %in% countrycode_data$iso2c
        		values$df_data$country[idx] <- input$country
