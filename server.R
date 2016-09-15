@@ -1,5 +1,4 @@
 library(shiny)
-source("C:/Users/Marta Klimaszewska/Documents/shiny/global.R")
 function(input, output) {
 ##We are creating a data frame that is not reactive
     values <- reactiveValues(df_data = NULL)
@@ -68,15 +67,7 @@ function(input, output) {
       ###COMMON CHANGES###
         
 ######Filtering phones
-      	options(scipen=999)
-      	phones <- values$df_data$phone 
-      	ind <- which(substring(phones, 1, 1) == 0)
-      	y <- as.numeric(gsub("\\D", "", phones))
-      	y[ind] <- paste0('0', y[ind])
-      	phones <- y
-      	idx <- nchar(phones) < 7
-      	phones[idx | is.na(phones)] <- '' #or 000000000
-      	values$df_data$phone <- phones
+        values$df_data$phone <- phone_repair(values$df_data$phone)
       
 ######Filling relevant columns with user input
       	idx <- (is.na(values$df_data$agent_signature) | values$df_data$agent_signature == '')
@@ -84,26 +75,17 @@ function(input, output) {
       	values$df_data$contact_details_update <- as.character(input$date)
       
 ######Mail filtering
-      	email_repair(values$df_data$email)
-      	#values$df_data$email <- gsub('\\(at\\)', '@', values$df_data$email)
-      	#idx <- grepl( "^[^@]+@[^@]+\\.", values$df_data$email)
-      	#values$df_data$email[!idx] <- ""
+
+      	values$df_data$email <- email_repair(values$df_data$email)
+
 ######Status filtering
       
       ##TO DO
       
 ######country filtering
-      	library(countrycode)
       	
-      	idx <- countrycode(values$df_data$country, "iso3c", "iso2c")
-      	values$df_data$country[!is.na(idx)] <- idx[!is.na(idx)]
-      	if (any(!toupper(unique(values$df_data$country)) %in% countrycode_data$iso2c)) {
-       		idx <- !toupper(values$df_data$country) %in% countrycode_data$iso2c
-       		values$df_data$country[idx] <- input$country
-      	}
-      	if (any(is.na(values$df_data$country) | values$df_data$country == "")) {
-      	    values$df_data[(values$df_data$country == "" | is.na(values$df_data$country)), "country"] <- input$country
-      	}
+      values$df_data$country <- country_repair(values$df_data ,values$df_data$country ,input$country)
+      
       }
     })
     
