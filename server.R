@@ -81,7 +81,7 @@ function(input, output) {
         if (input$platform == 1){
           batch_platform <- "amazon"
           values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
-        } if (input$platform == 2){
+        } else if (input$platform == 2){
           batch_platform <- "ebay"
           values$df_data <- empty_rows(values$df_data, values$ebay_username)
         }
@@ -93,9 +93,17 @@ function(input, output) {
           values$df_data[is.na(values$df_data$platform), "platform"] <- batch_platform
           values$df_data[values$df_data$platform == "", "platform"] <- batch_platform
         }
+######Filtering Countries
+        values$df_data$country <- country_repair(values$df_data,values$df_data$country, input$country)
+######Matching countries to empty language
+        #TO DO
+######Filtering phone numbers
+        values$df_data$phone <- phone_repair(values$df_data$phone)
+######Filtering emails
+        values$df_data$email <- email_repair(values$df_data$email)
       }
     })
-    
+
 ######Downloading the file
     output$downloadData <- downloadHandler(filename = function() { 
       paste(input$date, '.csv', sep='') }, content = function(file)
