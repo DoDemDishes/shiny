@@ -26,10 +26,19 @@ output$ui <- renderUI({
     # Depending on input$input_type, we'll generate a different
     # UI component and send it to the client. 
     switch(input$event,
-      "1" = sliderInput("dynamic", "amazon",
-                             min = 1, max = 20, value = 10),
-      "2" = sliderInput("dynamic", "ebay",
-                             min = 1, max = 20, value = 10),
+      "1" = {list(
+        selectInput("lead_source", "Pick the source of leads", c("Databse scrapinghub",
+                                                                 "Manual Scraping ", "Social Media",
+                                                                 "Databse BuiltWith","Blog",
+                                                                 "Parnership","Advertisement",
+                                                                 "TradeShow")),
+        selectInput("lead_status", "Pick the status of leads", c("Marketing Nurturing","Processing"))
+            )},
+      "2" = {list(
+        textInput("agent", "Pick an Agent", placeholder = "For example: GeorgeM"),
+        textInput("country", "Pick a country", placeholder = "For example: GB,US,IT,ES,CN"),
+        dateInput("date", "Pick update date")
+      )},
       "3" = sliderInput("dynamic", "webstore",
                              min = 1, max = 20, value = 10)
     )
