@@ -11,26 +11,38 @@ function(input, output) {
 #########################################    
 ##When the go button is clicked we run the script to filter out the file    
 #########################################
+
+##Changing the separator
     observeEvent(input$change, {
     	values$df_data <- read.csv(input$file$datapath, sep = input$sep, stringsAsFactors = F)
     })
     
+##Combined changes    
     observeEvent(input$go, {
-      if(input$event == 3){
+##############
+##GMV UPDATE##
+##############      
+      if(input$event == 3) {
+        ###AMAZON###
           if(input$platform == 1){
               values$df_data <- values$df_data[,1:2]
               columns <- c("amazon_merchant_id", "predicted_gmv")
               colnames(values$df_data) <- columns
               values$df_data <- values$df_data[!(is.na(values$df_data$amazon_merchant_id) | values$df_data$amazon_merchant_id == ""),] 
           }
+        ###EBAY###
           if(input$platform == 2){
               values$df_data <- values$df_data[,1:2]
               columns <- c("ebay_username", "predicted_gmv")
               colnames(values$df_data) <- columns
               values$df_data <- values$df_data[!(is.na(values$df_data$ebay_username) | values$df_data$ebay_username == ""),] 
           }
-      } else{
-    	if(input$platform == 1){
+      } else {
+################
+##LEADS UPDATE##
+################
+      ###AMAZON###
+    	  if(input$platform == 1){
 ######Preparing columns in the right order and names
       		values$df_data <- values$df_data[,1:9]
       		columns <- c("amazon_merchant_id", "country", "first_name", "last_name", "email", "phone", 
@@ -40,7 +52,8 @@ function(input, output) {
       
 ######Deleting rows with empty id
       		values$df_data <- values$df_data[!(is.na(values$df_data$amazon_merchant_id) | values$df_data$amazon_merchant_id == ""),] 
-      	} 
+      	}
+      ###EBAY###   
       	if(input$platform == 2){
         	temp <- values$df_data[,1:9]
         	values$df_data <- temp
@@ -52,6 +65,8 @@ function(input, output) {
         ######Deleting rows with empty id
         	values$df_data <- values$df_data[!(is.na(values$df_data$ebay_username) | values$df_data$ebay_username == ""),] 
       	}
+      ###COMMON CHANGES###
+        
 ######Filtering phones
       	options(scipen=999)
       	phones <- values$df_data$phone 
