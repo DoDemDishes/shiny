@@ -29,7 +29,7 @@ function(input, output) {
               values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
           }
         ###EBAY###
-          if(input$platform == 2){
+          else if(input$platform == 2){
             colnames(values$df_data) <- columns_update("ebay_username", values$df_data, input$event)
             values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
           }
@@ -37,14 +37,14 @@ function(input, output) {
 ################
 ##LEADS UPDATE##
 ################
-      if(input$event == 2) {
+      else if(input$event == 2) {
       ###AMAZON###
     	  if(input$platform == 1){
       		colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data, input$event)
       		values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
       	}
       ###EBAY###   
-      	if(input$platform == 2){
+      	else if(input$platform == 2){
       	  colnames(values$df_data) <- columns_update("ebay_username", values$df_data, input$event)
         	values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
       	}
@@ -67,7 +67,7 @@ function(input, output) {
 #############
 ##NEW LEADS##
 #############
-      if (input$event == 1){
+      else if (input$event == 1){
 ###data frame template###        
         columns <- c("company_name", "amazon_merchant_id", "amazon_feedback", "ebay_username"
                      ,"webstore_url", "webstore_traffic", "category", "platform"              
@@ -79,19 +79,14 @@ function(input, output) {
         values$df_data <- values$df_data[,1:23]
         colnames(values$df_data) <- columns
         if (input$platform == 1){
-          batch_platform <- "amazon"
+          values$df_data <- platform_update("amazon", values$df_data, values$df_data$platform)
           values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
-        } if (input$platform == 2){
-          batch_platform <- "ebay"
+        } else if (input$platform == 2){
+          values$df_data <- platform_update("ebay", values$df_data, values$df_data$platform)
           values$df_data <- empty_rows(values$df_data, values$ebay_username)
         }
         else {
-          batch_platform <- "webstore"
-        }
-      
-        if ( any( is.na(values$df_data$platform) | values$df_data$platform == "")) {
-          values$df_data[is.na(values$df_data$platform), "platform"] <- batch_platform
-          values$df_data[values$df_data$platform == "", "platform"] <- batch_platform
+          values$df_data <- platform_update("webstore", values$df_data, values$df_data$platform)
         }
       }
     })
