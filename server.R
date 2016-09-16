@@ -27,6 +27,7 @@ output$ui <- renderUI({
     # UI component and send it to the client. 
     switch(input$event,
       "1" = {list(
+        textInput("country", "Pick a country", placeholder = "For example: GB,US,IT,ES,CN"),
         selectInput("lead_source", "Pick the source of leads", c("Databse scrapinghub",
                                                                  "Manual Scraping ", "Social Media",
                                                                  "Databse BuiltWith","Blog",
@@ -39,8 +40,7 @@ output$ui <- renderUI({
         textInput("country", "Pick a country", placeholder = "For example: GB,US,IT,ES,CN"),
         dateInput("date", "Pick update date")
       )},
-      "3" = sliderInput("dynamic", "webstore",
-                             min = 1, max = 20, value = 10)
+      "3" = NULL
     )
   })
 
@@ -117,7 +117,7 @@ output$ui <- renderUI({
           values$df_data <- platform_update("webstore", values$df_data, values$df_data$platform)
         }
 ######Filtering Countries
-        values$df_data$country <- country_repair(values$df_data,values$df_data$country, input$country)
+        values$df_data$country <- country_repair(values$df_data, values$df_data$country, input$country)
 ######Matching countries to empty language
         #TO DO
 ######Filtering phone numbers
