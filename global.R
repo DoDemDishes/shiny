@@ -50,7 +50,7 @@ country_repair <- function(df,data,input){
 }
 
 platform_update <- function(batch_platform, data, column){
-    if ( any( is.na(column) | column == "")) {
+    if (any(is.na(column) | column == "")) {
       data[is.na(column), "platform"] <- batch_platform
       data[column == "", "platform"] <- batch_platform
     }
