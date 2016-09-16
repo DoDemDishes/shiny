@@ -34,9 +34,7 @@ navbarPage("Lead Automation Tool",
                     actionButton("change", "Change the separator")
                 ),
                 tags$p(
-                    textInput("agent", "Pick an Agent", placeholder = "For example: GeorgeM"),
-                    textInput("country", "Pick a country", placeholder = "For example: GB,US,IT,ES,CN"),
-                    dateInput("date", "Pick update date"),
+                    uiOutput("ui"),
                     actionButton("go", "Go!")
                 ),
                 tags$p(
