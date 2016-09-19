@@ -129,6 +129,7 @@ output$ui <- renderUI({
       df <- build_df(input$event, input$platform, values$df_data)
       df_names <- colnames(df)
       df[, df_names] <- values$df_data[, df_names]
+      print(head(df))
     })
 
 ######Downloading the file
