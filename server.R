@@ -54,12 +54,10 @@ output$ui <- renderUI({
       if(input$event == 3) {
         ###AMAZON###
           if(input$platform == 1){
-              colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data, input$event)
               values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
           }
         ###EBAY###
           else if(input$platform == 2){
-            colnames(values$df_data) <- columns_update("ebay_username", values$df_data, input$event)
             values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
           }
       } 
@@ -69,12 +67,10 @@ output$ui <- renderUI({
       else if(input$event == 2) {
       ###AMAZON###
     	  if(input$platform == 1){
-      		colnames(values$df_data) <- columns_update("amazon_merchant_id", values$df_data, input$event)
       		values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
       	}
       ###EBAY###   
       	else if(input$platform == 2){
-      	  colnames(values$df_data) <- columns_update("ebay_username", values$df_data, input$event)
         	values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
       	}
 ###COMMON CHANGES###
@@ -97,20 +93,12 @@ output$ui <- renderUI({
 ##NEW LEADS##
 #############
       else if (input$event == 1){
-###data frame template###        
-        columns <- c("company_name", "amazon_merchant_id", "amazon_feedback", "ebay_username"
-                     ,"webstore_url", "webstore_traffic", "category", "platform"              
-                     ,"country", "first_name", "last_name", "phone", "email", "language"
-                     ,"lead_source", "lead_status", "marketing_campaign_2", "webstore_platform"      
-                     ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv" 
-                     ,"ebay_item_location", "ebay_posts_to")
-        
-        values$df_data <- values$df_data[,1:23]
-        colnames(values$df_data) <- columns
         if (input$platform == 1){
+    ##amazon      
           values$df_data <- platform_update("amazon", values$df_data, values$df_data$platform)
           values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
         } else if (input$platform == 2){
+    ##ebay
           values$df_data <- platform_update("ebay", values$df_data, values$df_data$platform)
           values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
         }
