@@ -17,6 +17,7 @@ colnames(temp) <- c("amazon_merchant_id", "country", "first_name", "last_name", 
                     "agent_signature", "contact_details_update", "status")
 
 ## FIND AVG nchar in each column ##
+
 col_char_len <- c()
 find_mean <- function(data){
   for (i in 1:ncol(data))
@@ -28,11 +29,11 @@ col_char_len <- find_mean(my_data)
 
 ## INDENTIFY AND ASSIGN amazon_merchant_id ##
 for (i in 1:length(col_char_len)){
-  if ((!is.nan(col_char_len[i])) & (col_char_len[i]>13) & (col_char_len[i]<14) & 
+  if ((!is.nan(col_char_len[i])) & (col_char_len[i]>=13) & (col_char_len[i]<=14) & 
       (substring(toupper(my_data[min(which(!is.na(my_data[,i]))),i]), 1, 1) == "A")) {
     temp$amazon_merchant_id <- my_data[,i]
     print(1)
-    cond <- FALSE
+    
   } else {
     print(2)
   }
@@ -41,7 +42,7 @@ for (i in 1:length(col_char_len)){
 ## IDENTIFY AND ASSIGN country ##
  
 for (i in 1: length(col_char_len)){
-  if ((!is.nan(col_char_len[i])) & (col_char_len[i]>2) & (col_char_len[i]<3)){
+  if ((!is.nan(col_char_len[i])) & (col_char_len[i]>=2) & (col_char_len[i]<=3)){
     temp$country <- my_data[,i]
   } else{
   }

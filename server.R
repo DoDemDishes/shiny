@@ -47,6 +47,8 @@ output$ui <- renderUI({
     
 ##Combined changes    
     observeEvent(input$go, {
+      df <- build_df(input$event, input$platform)
+      df_names <- colnames(df)
 ##############
 ##GMV UPDATE##
 ##############      
@@ -125,6 +127,7 @@ output$ui <- renderUI({
 ######Filtering emails
         values$df_data$email <- email_repair(values$df_data$email)
       }
+      df[,df_names] <- values$df_data[, df_names]
     })
 
 ######Downloading the file
