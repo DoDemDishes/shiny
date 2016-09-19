@@ -66,7 +66,7 @@ build_df <- function(event, platform, my_data){
      ,"lead_source", "lead_status", "marketing_campaign_2", "webstore_platform"
      ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv"
      ,"ebay_item_location", "ebay_posts_to")
-    df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringAsFactors = FALSE)
+    df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringsAsFactors = FALSE)
     colnames(df) <- columns
   }
   else if(event == 2){
