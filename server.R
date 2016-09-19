@@ -111,12 +111,22 @@ observeEvent(input$go, {
   ######Filtering phone numbers
   values$df_data$phone <- phone_repair(values$df_data$phone)
   ######Filtering emails
-  values$df_data$email <- email_repair(values$df_data$email)
+  if("email" %in% colnames(values$df_data)){
+    values$df_data$email <- email_repair(values$df_data$email)
+  }
   }
   df <- build_df(input$event, input$platform, values$df_data)
   df_names <- colnames(df)
-  df[, df_names] <- values$df_data[, df_names]
-  print(head(df))
+  
+  for (i in colnames(values$df_data)){
+    if(i %in% df_names){
+      df[,i] <- values$df_data[,i]
+    }else{
+    }
+  }
+      
+    #df[, df_names] <- values$df_data[, df_names]
+  #print(head(df))
   output$df_table <- renderTable(head(df,5))
 })
 
