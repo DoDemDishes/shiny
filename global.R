@@ -66,15 +66,25 @@ build_df <- function(event, platform, my_data){
      ,"lead_source", "lead_status", "marketing_campaign_2", "webstore_platform"
      ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv"
      ,"ebay_item_location", "ebay_posts_to")
-    df <- data.frame(matrix("", nrow = nrow(my_data), ncol = 23), stringsAsFactors = FALSE)
+
+    df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringsAsFactors = FALSE)
+
     colnames(df) <- columns
   }
   else if(event == 2){
     if(platform == 1){
       ##AMAZON UPDATE
+      columns <- c("amazon_merchant_id", "country", "first_name", "last_name", "email", "phone", 
+      "agent_signature", "contact_details_update", "status")
+      df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringAsFactors = FALSE)
+      colnames(df) <- columns
     }
     else if(platform == 2){
       ##EBAY UPDATE
+      columns <- c("ebay_username", "country", "first_name", "last_name", "email", "phone", 
+      "agent_signature", "contact_details_update", "status")
+      df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringAsFactors = FALSE)
+      colnames(df) <- columns
     }
     else{
       ##TO DO WEBSTORE
@@ -82,6 +92,10 @@ build_df <- function(event, platform, my_data){
   }
   else{
     ##GMV UPDATE
+    columns <- c("ebay_username", "country", "first_name", "last_name", "email", "phone", 
+    "agent_signature", "contact_details_update", "status")
+    df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringAsFactors = FALSE)
+    colnames(df) <- columns
   }
 
   return(df)
