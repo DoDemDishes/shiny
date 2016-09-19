@@ -138,10 +138,28 @@ observeEvent(input$go, {
 
 ######Downloading the file
 output$downloadData <- downloadHandler(filename = function() { 
-  paste(input$date, '.csv', sep='') }, content = function(file)
-  {write.csv(values$df_data, row.names = F, file)}, contentType = 'csv')
+  paste(input$date, '.csv', sep='') }, content = function(file){
+    write.csv(values$df_data, row.names = F, file)
+    }, contentType = 'csv')
 
 output$df_data_out <- renderTable(head(values$df_data,5))
+
+output$downloadData2 <- downloadHandler(
+  filename = 'pdfs.zip',
+  content = function(fname) {
+    fs <- c("rawfile.csv", "readyfile.csv")
+    tmpdir <- tempdir()
+    setwd(tempdir())
+    print (tempdir())
+    write.csv(values$df_data, file = "rawfile.csv")
+    write.csv(df, file = "readyfile.csv")
+    print (fs)
+
+    zip(zipfile=fname, files=fs)
+    if(file.exists(paste0(fname, ".zip"))) {file.rename(paste0(fname, ".zip"), fname)}
+  },
+  contentType = "application/zip"
+)
 
 ######Table with sum of rows with phone, mail, mail + phone
 rowSummary <- reactive({
