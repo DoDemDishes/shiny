@@ -74,14 +74,14 @@ build_df <- function(event, platform, my_data){
       ##AMAZON UPDATE
       columns <- c("amazon_merchant_id", "country", "first_name", "last_name", "email", "phone", 
       "agent_signature", "contact_details_update", "status")
-      df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringAsFactors = FALSE)
+      df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringsAsFactors = FALSE)
       colnames(df) <- columns
     }
     else if(platform == 2){
       ##EBAY UPDATE
       columns <- c("ebay_username", "country", "first_name", "last_name", "email", "phone", 
       "agent_signature", "contact_details_update", "status")
-      df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringAsFactors = FALSE)
+      df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringsAsFactors = FALSE)
       colnames(df) <- columns
     }
     else{
@@ -92,7 +92,7 @@ build_df <- function(event, platform, my_data){
     ##GMV UPDATE
     columns <- c("ebay_username", "country", "first_name", "last_name", "email", "phone", 
     "agent_signature", "contact_details_update", "status")
-    df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringAsFactors = FALSE)
+    df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(my_data)), stringsAsFactors = FALSE)
     colnames(df) <- columns
   }
 
