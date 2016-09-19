@@ -9,7 +9,7 @@ columns_update <- function(id_name, data, event){
   if (event == 2){
     data <- data[,1:9]
     columns <- c(id_name, "country", "first_name", "last_name", "email", "phone", 
-               "agent_signature", "contact_details_update", "status")
+     "agent_signature", "contact_details_update", "status")
   } 
   if (event == 3){
     data <- data[,1:2]
@@ -50,9 +50,38 @@ country_repair <- function(df,data,input){
 }
 
 platform_update <- function(batch_platform, data, column){
-    if (any(is.na(column) | column == "")) {
-      data[is.na(column), "platform"] <- batch_platform
-      data[column == "", "platform"] <- batch_platform
+  if (any(is.na(column) | column == "")) {
+    data[is.na(column), "platform"] <- batch_platform
+    data[column == "", "platform"] <- batch_platform
+  }
+  return(data)
+}
+
+build_df <- function(event, platform){
+  if(event == 1){
+    ##NEW LEADS
+    columns <- c("company_name", "amazon_merchant_id", "amazon_feedback", "ebay_username"
+     ,"webstore_url", "webstore_traffic", "category", "platform"
+     ,"country", "first_name", "last_name", "phone", "email", "language"
+     ,"lead_source", "lead_status", "marketing_campaign_2", "webstore_platform"
+     ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv"
+     ,"ebay_item_location", "ebay_posts_to")
+    df <- data.frame(row.names = columns, stringAsFactors = FALSE)
+  }
+  else if(event == 2){
+    if(platform == 1){
+      ##AMAZON UPDATE
     }
-    return(data)
+    else if(platform == 2){
+      ##EBAY UPDATE
+    }
+    else{
+      ##TO DO WEBSTORE
+    }
+  }
+  else{
+    ##GMV UPDATE
+  }
+
+  return(df)
 }
