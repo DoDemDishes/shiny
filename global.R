@@ -49,13 +49,6 @@ country_repair <- function(df,data,input){
   return(data)
 }
 
-platform_update <- function(batch_platform, data, column){
-  if (any(is.na(column) | column == "")) {
-    data[is.na(column), "platform"] <- batch_platform
-    data[column == "", "platform"] <- batch_platform
-  }
-  return(data)
-}
 
 build_df <- function(event, platform, my_data){
   if(event == 1){

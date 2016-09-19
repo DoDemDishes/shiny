@@ -73,7 +73,7 @@ observeEvent(input$go, {
         else if(input$platform == 2){
          values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
        }
-  ###COMMON CHANGES###
+  ###COMMON CHANGES FOR UPDATES###
 
   ######Filtering phones
   values$df_data$phone <- phone_repair(values$df_data$phone)
@@ -82,7 +82,6 @@ observeEvent(input$go, {
   idx <- (is.na(values$df_data$agent_signature) | values$df_data$agent_signature == '')
   values$df_data$agent_signature[idx] <- input$agent
   values$df_data$contact_details_update <- as.character(input$date)
-
   ######Mail filtering
   values$df_data$email <- email_repair(values$df_data$email)
 
@@ -95,14 +94,14 @@ observeEvent(input$go, {
   else if (input$event == 1){
 
   if (input$platform == 1){
-    values$df_data <- platform_update("amazon", values$df_data, values$df_data$platform)
+    values$df_data$platform <- "amazon"
     values$df_data <- empty_rows(values$df_data, values$df_data$amazon_merchant_id)
     } else if (input$platform == 2){
-      values$df_data <- platform_update("ebay", values$df_data, values$df_data$platform)
+      values$df_data$platform <- "ebay"
       values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
     }
     else {
-      values$df_data <- platform_update("webstore", values$df_data, values$df_data$platform)
+      values$df_data$platform <- "webstore"
     }
   ######Filtering Countries
   values$df_data$country <- country_repair(values$df_data, values$df_data$country, input$country)
@@ -110,6 +109,13 @@ observeEvent(input$go, {
           #TO DO
   ######Filtering phone numbers
   values$df_data$phone <- phone_repair(values$df_data$phone)
+  ######Adding user input
+  values$df_data$lead_source <- input$lead_source
+  values$df_data$lead_status <- input$lead_status
+  ######Filtering language
+  if (any(is.na(values$df_data$language) | values$df_data$language == "")) {
+    values$df_data[(values$df_data$language == "" | is.na(values$df_data$language)), "language"] <- "en"
+  }
   ######Filtering emails
   if("email" %in% colnames(values$df_data)){
     values$df_data$email <- email_repair(values$df_data$email)
