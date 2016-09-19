@@ -57,7 +57,7 @@ platform_update <- function(batch_platform, data, column){
   return(data)
 }
 
-build_df <- function(event, platform, data){
+build_df <- function(event, platform, my_data){
   if(event == 1){
     ##NEW LEADS
     columns <- c("company_name", "amazon_merchant_id", "amazon_feedback", "ebay_username"
@@ -66,7 +66,7 @@ build_df <- function(event, platform, data){
      ,"lead_source", "lead_status", "marketing_campaign_2", "webstore_platform"
      ,"predicted_ebay_gmv", "predicted_amazon_gmv", "predicted_webstore_gmv"
      ,"ebay_item_location", "ebay_posts_to")
-    df <- data.frame(matrix("", ncol = length(columns), nrow = nrow(data)), stringAsFactors = FALSE)
+    df <- data.frame(matrix("", nrow = nrow(my_data), ncol = 23), stringsAsFactors = FALSE)
     colnames(df) <- columns
   }
   else if(event == 2){
