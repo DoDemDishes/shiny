@@ -150,11 +150,10 @@ output$downloadData2 <- downloadHandler(
     fs <- c("rawfile.csv", "readyfile.csv")
     tmpdir <- tempdir()
     setwd(tempdir())
-    print (tempdir())
-    write.csv(values$df_data, file = "rawfile.csv")
-    write.csv(df, file = "readyfile.csv")
-    print (fs)
-
+    #print (tempdir())
+    write(values$df_data, file = "rawfile.csv")
+    write(df, file = "readyfile.csv")
+    
     zip(zipfile=fname, files=fs)
     if(file.exists(paste0(fname, ".zip"))) {file.rename(paste0(fname, ".zip"), fname)}
   },
