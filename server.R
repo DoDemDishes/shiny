@@ -4,7 +4,7 @@ options(shiny.maxRequestSize=30*1024^2)
 
 function(input, output) {
 ##We are creating a data frame that is not reactive
-values <- reactiveValues(df_data = NULL)
+values <- reactiveValues(df_data = NULL, df = NULL)
 ##When the button to upload the file is clicked we fill the data frame    
 observeEvent(input$file, {
  values$df_data <- read.csv(input$file$datapath, sep = input$sep, stringsAsFactors = F)
@@ -121,19 +121,15 @@ observeEvent(input$go, {
     values$df_data$email <- email_repair(values$df_data$email)
   }
   }
-  df <- build_df(input$event, input$platform, values$df_data)
-  df_names <- colnames(df)
+  values$df <- build_df(input$event, input$platform, values$df_data)
+  df_names <- colnames(values$df)
   
   for (i in colnames(values$df_data)){
     if(i %in% df_names){
-      df[,i] <- values$df_data[,i]
+      values$df[,i] <- values$df_data[,i]
     }else{
     }
   }
-      
-    #df[, df_names] <- values$df_data[, df_names]
-  #print(head(df))
-  output$df_table <- renderTable(head(df,5))
 })
 
 ######Downloading the file
@@ -142,23 +138,17 @@ output$downloadData <- downloadHandler(filename = function() {
     write.csv(values$df_data, row.names = F, file)
     }, contentType = 'csv')
 
-output$df_data_out <- renderTable(head(values$df_data,5))
+output$downloadData2 <- downloadHandler(filename = function() { 
+  paste('turbo', '.csv', sep='') }, content = function(file){
+    write.csv(values$df, row.names = F, file)
+  }, contentType = 'csv')
 
-output$downloadData2 <- downloadHandler(
-  filename = 'pdfs.zip',
-  content = function(fname) {
-    fs <- c("rawfile.csv", "readyfile.csv")
-    tmpdir <- tempdir()
-    setwd(tempdir())
-    #print (tempdir())
-    write(values$df_data, file = "rawfile.csv")
-    write(df, file = "readyfile.csv")
-    
-    zip(zipfile=fname, files=fs)
-    if(file.exists(paste0(fname, ".zip"))) {file.rename(paste0(fname, ".zip"), fname)}
-  },
-  contentType = "application/zip"
-)
+######Rendering the tables
+
+output$df_data_out <- renderTable(head(values$df_data,5))
+output$df_table <- renderTable(head(values$df,5))
+
+
 
 ######Table with sum of rows with phone, mail, mail + phone
 rowSummary <- reactive({
