@@ -3,16 +3,12 @@ library(shiny)
 options(shiny.maxRequestSize=30*1024^2) 
 
 function(input, output) {
-##We are creating a data frame that is not reactive
+##Creating a data frame that is not reactive
 values <- reactiveValues(df_data = NULL, df = NULL)
 ##When the button to upload the file is clicked we fill the data frame    
 observeEvent(input$file, {
  values$df_data <- read.csv(input$file$datapath, sep = input$sep, stringsAsFactors = F)
  })
-
-#########################################    
-##When the go button is clicked we run the script to filter out the file    
-#########################################
 
 ##Changing the separator
 observeEvent(input$change, {
@@ -22,9 +18,6 @@ observeEvent(input$change, {
 output$ui <- renderUI({
   if (is.null(input$event))
   return()
-
-    # Depending on input$input_type, we'll generate a different
-    # UI component and send it to the client. 
     switch(input$event,
       "1" = {list(
         textInput("country", "Pick a country", placeholder = "For example: GB,US,IT,ES,CN"),
@@ -44,8 +37,10 @@ output$ui <- renderUI({
       )
     })
 
+#########################################
+##When the go button is clicked we run the script to filter out the file    
+#########################################
 
-##Combined changes    
 observeEvent(input$go, {
 
   ##############
@@ -134,12 +129,12 @@ observeEvent(input$go, {
 
 ######Downloading the file
 output$downloadData <- downloadHandler(filename = function() { 
-  paste(input$date, '.csv', sep='') }, content = function(file){
+  paste(event(input$event),'_',platform(input$platform),'_',as.character(Sys.Date()),'_raw','.csv', sep='') }, content = function(file){
     write.csv(values$df_data, row.names = F, file)
     }, contentType = 'csv')
 
 output$downloadData2 <- downloadHandler(filename = function() { 
-  paste('turbo', '.csv', sep='') }, content = function(file){
+  paste(event(input$event),'_',platform(input$platform),'_',as.character(Sys.Date()), '_ready','.csv', sep='') }, content = function(file){
     write.csv(values$df, row.names = F, file)
   }, contentType = 'csv')
 

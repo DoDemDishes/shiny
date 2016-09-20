@@ -38,8 +38,8 @@ navbarPage("Lead Automation Tool",
             actionButton("go", "Go!")
             ),
         tags$p(
-            downloadButton('downloadData', 'Download'),
-            downloadButton('downloadData2', 'test')
+            downloadButton('downloadData', 'Download raw'),
+            downloadButton('downloadData2', 'Download ready')
             )
         ),
        mainPanel(
