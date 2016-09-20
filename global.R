@@ -100,3 +100,24 @@ build_df <- function(event, platform, my_data){
 
   return(df)
 }
+
+
+event <- function(input){
+  if (input == 1){
+    return("new_leads")
+  } else if (input == 2){
+    return("contacts_update")
+  } else{
+    return("gmv_update")
+  }
+}
+
+platform <- function(input){
+  if (input == 1){
+    return("amazon")
+  } else if (input ==2){
+    return("ebay")
+  } else {
+    return("webstore")
+  }
+}
