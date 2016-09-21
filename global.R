@@ -36,6 +36,7 @@ phone_repair <- function(data){
 }
 
 country_repair <- function(df,data,input){
+  data <- toupper(data)
   library(countrycode)
   idx <- countrycode(data, "iso3c", "iso2c")
   data[!is.na(idx)] <- idx[!is.na(idx)]
@@ -120,4 +121,20 @@ platform <- function(input){
   } else {
     return("webstore")
   }
+}
+
+get_country <- function(df){
+  df$country <- lapply(strsplit(as.character(df$business_address), ", "), tail, 1)
+  df$country[lengths(df$country) == 0] <- ""
+  df$country <- unlist(df$country)
+  return(df$country)
+}
+
+set_language <- function(df){
+  library(dplyr)
+  iso <- read.csv("C:/Users/Marta Klimaszewska/Documents/shiny/ISO.csv", sep = ",")
+  df <- df$language <- df %>% 
+    left_join(iso %>% 
+                select(ISO.Country, ISO.Language), by = c("country" = "ISO.Country"))
+  df$language <- df$ISO.Language
 }

@@ -99,6 +99,7 @@ observeEvent(input$go, {
       values$df_data$platform <- "webstore"
     }
   ######Filtering Countries
+  values$df_data$country <- get_country(values$df_data)
   values$df_data$country <- country_repair(values$df_data, values$df_data$country, input$country)
   ######Matching countries to empty language
           #TO DO
@@ -108,6 +109,7 @@ observeEvent(input$go, {
   values$df_data$lead_source <- input$lead_source
   values$df_data$lead_status <- input$lead_status
   ######Filtering language
+  values$df_data$language <- set_language(values$df_data)
   if (any(is.na(values$df_data$language) | values$df_data$language == "")) {
     values$df_data[(values$df_data$language == "" | is.na(values$df_data$language)), "language"] <- "en"
   }
