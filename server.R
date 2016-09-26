@@ -1,4 +1,6 @@
 library(shiny)
+library(dplyr)
+library(countrycode)
 
 options(shiny.maxRequestSize=30*1024^2) 
 
@@ -69,7 +71,12 @@ observeEvent(input$go, {
          values$df_data <- empty_rows(values$df_data, values$df_data$ebay_username)
        }
   ###COMMON CHANGES FOR UPDATES###
-
+  
+    
+  ###Removing special characters
+  values$df_data$first_name <- str_replace_all(values$df_data$first_name, "[^a-zA-Z0-9]", "")
+  values$df_data$last_name <- str_replace_all(values$df_data$last_name, "[^a-zA-Z0-9]", "")  
+    
   ######Filtering phones
   values$df_data$phone <- phone_repair(values$df_data$phone)
 
@@ -98,6 +105,9 @@ observeEvent(input$go, {
     else {
       values$df_data$platform <- "webstore"
     }
+  ######Removing special characters
+  values$df_data$first_name <- str_replace_all(values$df_data$first_name, "[^a-zA-Z0-9]", "")
+  values$df_data$last_name <- str_replace_all(values$df_data$last_name, "[^a-zA-Z0-9]", "")
   ######Filtering Countries
   values$df_data$country <- get_country(values$df_data)
   values$df_data$country <- country_repair(values$df_data, values$df_data$country, input$country)

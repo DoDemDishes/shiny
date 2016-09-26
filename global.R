@@ -37,7 +37,6 @@ phone_repair <- function(data){
 
 country_repair <- function(df,data,input){
   data <- toupper(data)
-  library(countrycode)
   idx <- countrycode(data, "iso3c", "iso2c")
   data[!is.na(idx)] <- idx[!is.na(idx)]
   if (any(!toupper(unique(data)) %in% countrycode_data$iso2c)) {
@@ -131,8 +130,7 @@ get_country <- function(df){
 }
 
 set_language <- function(df){
-  library(dplyr)
-  iso <- read.csv("C:/Users/Marta Klimaszewska/Documents/shiny/ISO.csv", sep = ",")
+  iso <- read.csv("ISO.csv", sep = ",")
   df <- df$language <- df %>% 
     left_join(iso %>% 
                 select(ISO.Country, ISO.Language), by = c("country" = "ISO.Country"))
