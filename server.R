@@ -1,6 +1,7 @@
 library(shiny)
 library(dplyr)
 library(countrycode)
+library(stringr)
 
 options(shiny.maxRequestSize=30*1024^2) 
 
