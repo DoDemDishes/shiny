@@ -1,5 +1,6 @@
 library(shiny)
 library(markdown)
+library(stringr)
 
 navbarPage("Lead Automation Tool",
     tabPanel("Introduction",
@@ -7,7 +8,7 @@ navbarPage("Lead Automation Tool",
             sidebarPanel(
              tags$p(
                selectInput("event", label = h3("Choose an event"), 
-                choices = list("New leads" = 1, "Leads update" = 2, "GMV update" = 3), 
+                choices = list("New leads" = 1, "Contact update" = 2, "GMV update" = 3), 
                 selected = 1)
                ),
              tags$p(
@@ -21,8 +22,8 @@ navbarPage("Lead Automation Tool",
                )
              ),
             mainPanel(
-            	#includeMarkdown("C:/Users/Marta Klimaszewska/Downloads/Lead automation app/intro.md")
-                )
+              includeMarkdown("intro.md")  
+              )
             )
         ),
     tabPanel("Filtering",
